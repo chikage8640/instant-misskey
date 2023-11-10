@@ -1,0 +1,9 @@
+*.pem
+cloudflare-warp/
+db/
+env/meilisearch.env
+env/postgres.env
+misskey/config/default.yaml
+misskey/files/
+meili_data/
+redis/

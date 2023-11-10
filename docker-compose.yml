@@ -1,0 +1,100 @@
+version: "2.4"
+
+services:
+
+  nginx:
+    image: nginx:latest
+    restart: always
+    depends_on:
+      - web
+    volumes:
+      - ./nginx/default.conf:/etc/nginx/conf.d/default.conf
+      - ./nginx/certs:/etc/nginx/certs
+    networks:
+      - external_network
+    ports:
+      - "80:80"
+      - "443:443"
+    oom_score_adj: 100
+
+  web:
+    image: misskey/misskey:2023.10.2
+    restart: always
+    depends_on:
+      db:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+    networks:
+      - internal_network
+      - external_network
+    volumes:
+      - ./misskey/files:/misskey/files
+      - ./misskey/config:/misskey/.config:ro
+    oom_score_adj: 100
+
+  redis:
+    restart: always
+    image: redis:7-alpine
+    networks:
+      - internal_network
+    volumes:
+      - ./redis:/data
+    healthcheck:
+      test: "redis-cli ping"
+      interval: 5s
+      retries: 20
+    oom_score_adj: 0
+
+  db:
+    restart: always
+    image: postgres:15-alpine
+    networks:
+      - internal_network
+    env_file:
+      - ./env/postgres.env
+    volumes:
+      - ./db:/var/lib/postgresql/data
+    healthcheck:
+      test: "pg_isready -U $$POSTGRES_USER -d $$POSTGRES_DB"
+      interval: 5s
+      retries: 20
+    oom_score_adj: -1000
+    cpu_shares: 3096
+    mem_reservation: 256m
+
+  meilisearch:
+    restart: always
+    image: getmeili/meilisearch:v1.3
+    environment:
+      - MEILI_NO_ANALYTICS=true
+      - MEILI_ENV=production
+    env_file:
+      - ./env/meilisearch.env
+    networks:
+      - internal_network
+    volumes:
+      - ./meili_data:/meili_data
+    oom_score_adj: 30
+
+  warp:
+    build: ./warp-docker
+    restart: always
+    networks:
+      - external_network
+    environment:
+      - WARP_SLEEP=2
+      # - WARP_LICENSE_KEY= # optional
+    cap_add:
+      - NET_ADMIN
+    sysctls:
+      - net.ipv6.conf.all.disable_ipv6=0
+      - net.ipv4.conf.all.src_valid_mark=1
+    volumes:
+      - ./cloudflare-warp:/var/lib/cloudflare-warp
+    oom_score_adj: 100
+
+networks:
+  internal_network:
+    internal: true
+  external_network:
