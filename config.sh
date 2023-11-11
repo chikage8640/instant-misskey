@@ -6,8 +6,9 @@ cd `dirname $0`
 echo "Misskeyを運用するドメインを入力してください。(例: mi.example.com)"
 read DOMAIN
 
-# ドメインのドットを全てハイフンに置き換える
-DOMAIN_MEILISEARCH=${DOMAIN//./-}
+# Meilisearchのindexを聞く
+echo "Meilisearchのindexを入力してください。(例: mi-example-com)"
+read MEILISEARCH_INDEX
 
 # Postgresのパスワードを聞く
 echo "PostgreSQLのパスワードを入力してください。"
@@ -26,7 +27,7 @@ sudo cp ./nginx/default.conf.example ./nginx/default.conf
 sed -i -e "s/meilisearch-UUID/$UUID/g" ./env/meilisearch.env
 sed -i -e "s/POSTGRES_PASSWORD=example_password/POSTGRES_PASSWORD=$POSTGRES_PASSWORD/g" ./env/postgres.env
 sed -i -e "s/example.tld/$DOMAIN/g" ./misskey/config/default.yml
-sed -i -e "s/example-tld/$DOMAIN_MEILISEARCH/g" ./misskey/config/default.yml
+sed -i -e "s/example-tld/$MEILISEARCH_INDEX/g" ./misskey/config/default.yml
 sed -i -e "s/meilisearch-UUID/$UUID/g" ./misskey/config/default.yml
 sed -i -e "s/pass: example_password/pass: $POSTGRES_PASSWORD/g" ./misskey/config/default.yml
 sudo sed -i -e "s/example.tld/$DOMAIN/g" ./nginx/default.conf
