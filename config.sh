@@ -16,13 +16,6 @@ cp ./env/postgres.env.example ./env/postgres.env
 cp ./misskey/config/default.yml.example ./misskey/config/default.yml
 sudo cp ./nginx/default.conf.example ./nginx/default.conf
 
-# Meilisearchを使用するか聞く
-echo "Meilisearchを使用しますか？(y/N)"
-read answer
-if [ "$answer" = "y" ]; then
-    ./enable_meilisearch.sh
-fi
-
 # 設定ファイルを書き換え
 sed -i -e "s/POSTGRES_PASSWORD=example_password/POSTGRES_PASSWORD=$POSTGRES_PASSWORD/g" ./env/postgres.env
 sed -i -e "s/example.tld/$DOMAIN/g" ./misskey/config/default.yml
