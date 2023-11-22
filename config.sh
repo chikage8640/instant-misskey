@@ -11,7 +11,6 @@ echo "PostgreSQLのパスワードを入力してください。"
 read POSTGRES_PASSWORD
 
 # 設定ファイルをコピー
-cp ./docker-compose.yml.example ./docker-compose.yml
 cp ./env/postgres.env.example ./env/postgres.env
 cp ./misskey/config/default.yml.example ./misskey/config/default.yml
 sudo cp ./nginx/default.conf.example ./nginx/default.conf
