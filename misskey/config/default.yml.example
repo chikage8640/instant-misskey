@@ -98,12 +98,12 @@ redis:
 #   ┌───────────────────────────┐
 #───┘ MeiliSearch configuration └─────────────────────────────
 
-meilisearch:
-  host: meilisearch
-  port: 7700
-  apiKey: 'meilisearch-UUID'
-  ssl: false
-  index: 'example-tld'
+#meilisearch:
+#  host: meilisearch
+#  port: 7700
+#  apiKey: 'meilisearch-UUID'
+#  ssl: false
+#  index: 'example-tld'
 
 #   ┌───────────────┐
 #───┘ ID generation └───────────────────────────────────────────
