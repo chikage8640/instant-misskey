@@ -6,4 +6,5 @@ env/postgres.env
 misskey/config/default.yaml
 misskey/files/
 meili_data/
+nginx/default.conf
 redis/
