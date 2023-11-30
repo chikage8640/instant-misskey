@@ -3,7 +3,7 @@ version: "2.4"
 services:
 
   nginx:
-    image: nginx:latest
+    image: $MISSKEY_NGINX_IMAGE
     restart: always
     depends_on:
       - web
@@ -18,7 +18,7 @@ services:
     oom_score_adj: 100
 
   web:
-    image: misskey/misskey:2023.10.2
+    image: $MISSKEY_WEB_IMAGE
     restart: always
     depends_on:
       db:
@@ -35,7 +35,7 @@ services:
 
   redis:
     restart: always
-    image: redis:7-alpine
+    image: $MISSKEY_REDIS_IMAGE
     networks:
       - internal_network
     volumes:
@@ -48,7 +48,7 @@ services:
 
   db:
     restart: always
-    image: postgres:15-alpine
+    image: $MISSKEY_DB_IMAGE
     networks:
       - internal_network
     env_file:
@@ -65,7 +65,7 @@ services:
 
 #  meilisearch:
 #    restart: always
-#    image: getmeili/meilisearch:v1.3
+#    image: $MISSKEY_MEILISEARCH_IMAGE
 #    environment:
 #      - MEILI_NO_ANALYTICS=true
 #      - MEILI_ENV=production

@@ -13,6 +13,7 @@ read POSTGRES_PASSWORD
 # 設定ファイルをコピー
 cp ./env/postgres.env.example ./env/postgres.env
 cp ./misskey/config/default.yml.example ./misskey/config/default.yml
+cp ./docker-compose.yml.example ./docker-compose.yml
 sudo cp ./nginx/default.conf.example ./nginx/default.conf
 
 # 設定ファイルを書き換え
@@ -20,6 +21,13 @@ sed -i -e "s/POSTGRES_PASSWORD=example_password/POSTGRES_PASSWORD=$POSTGRES_PASS
 sed -i -e "s/example.tld/$DOMAIN/g" ./misskey/config/default.yml
 sed -i -e "s/pass: example_password/pass: $POSTGRES_PASSWORD/g" ./misskey/config/default.yml
 sudo sed -i -e "s/example.tld/$DOMAIN/g" ./nginx/default.conf
+
+# Meilisearchの有効化をするか聞く
+echo "Meilisearchを有効化しますか？(y/N)"
+read answer
+if [ "$answer" = "y" ]; then
+    bash ./enable_meilisearch.sh
+fi
 
 # 証明書のディレクトリを作成
 sudo mkdir -p ./nginx/certs
