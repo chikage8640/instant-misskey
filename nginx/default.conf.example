@@ -32,8 +32,8 @@ server {
     ssl_certificate_key /etc/nginx/certs/privkey.pem;
 
     # To use mTLS
-    ssl_verify_client on;
-    ssl_client_certificate /etc/nginx/certs/authenticated_origin_pull_ca.pem;
+#    ssl_verify_client on;
+#    ssl_client_certificate /etc/nginx/certs/authenticated_origin_pull_ca.pem;
 
     # To use Debian/Ubuntu's self-signed certificate (For testing or before issuing a certificate)
     #ssl_certificate     /etc/ssl/certs/ssl-cert-snakeoil.pem;

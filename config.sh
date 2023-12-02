@@ -45,9 +45,11 @@ if [ "$answer" != "n" ]; then
 fi
 
 # Cloudflareのオリジンプル用証明書のダウンロード
-echo "Cloudflareのオリジンプル用証明書をダウンロードしますか？(Y/n)"
+echo "CloudflareのオリジンプルにmTLSを使用しますか？(Y/n)"
 read answer
 if [ "$answer" != "n" ]; then
+    # ./nginx/default.confの「# To use mTLS」の後の2行をコメントアウトを解除
+    sudo sed -i -e '/# To use mTLS/, +2 s/^#//' ./nginx/default.conf
     sudo curl https://developers.cloudflare.com/ssl/static/authenticated_origin_pull_ca.pem -o ./nginx/certs/authenticated_origin_pull_ca.pem
 fi
 
