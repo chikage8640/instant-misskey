@@ -13,8 +13,8 @@ UUID=$(cat /proc/sys/kernel/random/uuid)
 cp ./env/meilisearch.env.example ./env/meilisearch.env
 
 # Meilisearchを有効化（コメントアウト解除）
-sed -i -e '/#meilisearch:/, +6 s/^#//' ./misskey/config/default.yml
-sed -i -e '/#  meilisearch:/, +13 s/^#//' ./docker-compose.yml
+sed -i -e '/#meilisearch:/, +5 s/^#//' ./misskey/config/default.yml
+sed -i -e '/#  meilisearch:/, +12 s/^#//' ./docker-compose.yml
 
 # 設定ファイルを書き換え
 sed -i -e "s/meilisearch-UUID/$UUID/g" ./env/meilisearch.env
