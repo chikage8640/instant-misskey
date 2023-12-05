@@ -78,7 +78,7 @@ done
 
 if $MAINTENANCE||$UPDATE; then
     docker compose pull
-    docker compose build --no-cache warp
+    docker compose build warp --build-arg CACHEBUST=$(date +%s)
 fi
 if $UPDATE; then
     git pull
