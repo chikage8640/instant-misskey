@@ -78,7 +78,7 @@ services:
 #    oom_score_adj: 30
 
   warp:
-    build: ./warp-docker
+    image: chikage8640/warp-docker
     restart: always
     networks:
       - external_network
