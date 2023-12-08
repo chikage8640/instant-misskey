@@ -81,10 +81,9 @@ if $MAINTENANCE||$UPDATE; then
 fi
 if $UPDATE; then
     git pull
-    git submodule update --init --recursive
 fi
-docker compose down
 if $BACKUP; then
+    docker compose down
     echo Backup start...
     XZ_OPT=-9 tar -Jcf - . | rclone rcat $BACKUP_PASS/$(date "+%Y_%m_%d_%H_%M_%S").tar.xz
 fi
