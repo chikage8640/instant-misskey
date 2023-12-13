@@ -10,6 +10,9 @@ read DOMAIN
 echo "PostgreSQLのパスワードを入力してください。"
 read POSTGRES_PASSWORD
 
+# /misskey/fileの作成
+sudo install -m 770 -o 991 -g 991 -d ./misskey/file
+
 # 設定ファイルをコピー
 cp ./env/postgres.env.example ./env/postgres.env
 cp ./misskey/config/default.yml.example ./misskey/config/default.yml
