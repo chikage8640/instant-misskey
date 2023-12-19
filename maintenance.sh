@@ -19,6 +19,9 @@ Options:
 EOS
 }
 
+# カレントディレクトリの所有者
+OWNER=$(ls -ld . | awk '{print $3}')
+
 # 引数を確認して整理
 BACKUP=false
 BACKUP_PASS=""
@@ -80,7 +83,7 @@ if $MAINTENANCE||$UPDATE; then
     docker compose pull
 fi
 if $UPDATE; then
-    git pull
+    su $OWNER -c "git pull"
 fi
 if $BACKUP; then
     docker compose down
