@@ -88,6 +88,6 @@ fi
 if $BACKUP; then
     docker compose down
     echo Backup start...
-    XZ_OPT=-9 tar -Jcf - . | rclone rcat $BACKUP_PASS/$(date "+%Y_%m_%d_%H_%M_%S").tar.xz
+    XZ_OPT=-9 tar -C ../ -Jcf - $(basename $(pwd)) | rclone rcat $BACKUP_PASS/$(date "+%Y_%m_%d_%H_%M_%S").tar.xz
 fi
 docker compose up -d
