@@ -159,7 +159,7 @@ proxyBypassHosts:
   - challenges.cloudflare.com
 
 # Proxy for SMTP/SMTPS
-#proxySmtp: http://127.0.0.1:3128   # use HTTP/1.1 CONNECT
+proxySmtp: http://web:1080   # use HTTP/1.1 CONNECT
 #proxySmtp: socks4://127.0.0.1:1080 # use SOCKS4
 #proxySmtp: socks5://127.0.0.1:1080 # use SOCKS5
 
