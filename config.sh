@@ -16,7 +16,7 @@ sudo install -m 770 -o 991 -g 991 -d ./misskey/files
 # 設定ファイルをコピー
 cp ./env/postgres.env.example ./env/postgres.env
 cp ./misskey/config/default.yml.example ./misskey/config/default.yml
-cp ./docker-compose.yml.example ./docker-compose.yml
+cp ./compose.yaml.example ./compose.yaml
 sudo cp ./nginx/default.conf.example ./nginx/default.conf
 
 # 設定ファイルを書き換え
