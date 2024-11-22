@@ -6,6 +6,10 @@ cd `dirname $0`
 echo "Misskeyを運用するドメインを入力してください。(例: mi.example.com)"
 read DOMAIN
 
+# セットアップパスワードを聞く
+echo "Misskeyの初期セットアップに使うパスワードを入力してください。"
+read SETUP_PASSWORD
+
 # Postgresのパスワードを聞く
 echo "PostgreSQLのパスワードを入力してください。"
 read POSTGRES_PASSWORD
@@ -21,8 +25,7 @@ sudo cp ./nginx/default.conf.example ./nginx/default.conf
 
 # 設定ファイルを書き換え
 sed -i -e "s/POSTGRES_PASSWORD=example_password/POSTGRES_PASSWORD=$POSTGRES_PASSWORD/g" ./env/postgres.env
-sed -i -e "s/example.tld/$DOMAIN/g" ./misskey/config/default.yml
-sed -i -e "s/pass: example_password/pass: $POSTGRES_PASSWORD/g" ./misskey/config/default.yml
+sed -i -e "s/example.tld/$DOMAIN/g; s/# setupPassword: example_password_please_change_this_or_you_will_get_hacked/setupPassword: $SETUP_PASSWORD/g;  s/pass: example_password/pass: $POSTGRES_PASSWORD/g" ./misskey/config/default.yml
 sudo sed -i -e "s/example.tld/$DOMAIN/g" ./nginx/default.conf
 
 # Meilisearchの有効化をするか聞く
