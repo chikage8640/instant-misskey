@@ -18,5 +18,6 @@ sed -i -e '/#  meilisearch:/, +12 s/^#//' ./compose.yaml
 
 # 設定ファイルを書き換え
 sed -i -e "s/meilisearch-UUID/$UUID/g" ./env/meilisearch.env
+sed -i -e "s/  provider: sqlLike/  provider: meilisearch/g" ./misskey/config/default.yml
 sed -i -e "s/example-tld/$MEILISEARCH_INDEX/g" ./misskey/config/default.yml
 sed -i -e "s/meilisearch-UUID/$UUID/g" ./misskey/config/default.yml
