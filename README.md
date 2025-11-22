@@ -1,6 +1,8 @@
 # instant-misskey
 
-これは、[Misskey Advent Calendar 2023](https://adventar.org/calendars/8742) 23日目の記事([ねこでもわかるMisskeyサーバーの建て方](https://blog.chikage.net/misskey-advent-calender-2023/))のためのリポジトリです。  
+これは、[Misskey Advent Calendar 2023](https://adventar.org/calendars/8742) 23日目の記事([ねこでもわかるMisskeyサーバーの建て方](https://blog.chikage.net/misskey-advent-calender-2023/))のためのリポジトリです。
+
+2025年11月22日追記：このリポジトリは作者のやる気の問題で放置され気味です。自己責任で利用してください。
 
 ## 使い方
 
