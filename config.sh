@@ -59,3 +59,9 @@ if [ "$answer" != "n" ]; then
     sudo curl https://developers.cloudflare.com/ssl/static/authenticated_origin_pull_ca.pem -o ./nginx/certs/authenticated_origin_pull_ca.pem
 fi
 
+# trustProxyについての注意喚起
+echo
+echo "このリポジトリに付属しているmisskeyの設定では、Cloudflareの背後で公開する前提でtrustProxyを2にしています。"
+echo "trustProxyは、Misskeyがリバースプロキシの背後で動作していることを認識するための設定です。"
+echo "Misskeyを運用する場合は、./misskey/config/default.ymlのtrustProxyの値をリバースプロキシの段数に変更してください。"
+echo "例えばこのリポジトリの想定では、Cloudflare→Nginx(このスクリプトで自動的に構成されています。)→Misskeyの順でリクエストが来るため、trustProxyは2に設定されています。"
