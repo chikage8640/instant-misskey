@@ -3,8 +3,9 @@ cloudflare-warp/
 db/
 env/meilisearch.env
 env/postgres.env
-misskey/config/default.yaml
+misskey/config/default.yml
 misskey/files/
 meili_data/
 nginx/default.conf
 redis/
+compose.yaml
